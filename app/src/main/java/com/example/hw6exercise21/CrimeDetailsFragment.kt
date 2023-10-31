@@ -15,7 +15,7 @@ class CrimeDetailsFragment :Fragment() {
 
 
 private lateinit var crime: Crime
-//private lateinit var binding: FragmentCrimeDetailBinding
+
 private var _binding: FragmentCrimeDetailBinding? = null
 
  private val binding
@@ -28,10 +28,12 @@ private var _binding: FragmentCrimeDetailBinding? = null
 
         crime = Crime(
 
+//Addition of requiresPolice that seems to work with the new conditional
             UUID.randomUUID(),
             title = "",
             date = Date(),
-            isSolved = false
+            isSolved = false,
+            requiresPolice = false
 
         )
     }

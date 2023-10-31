@@ -1,12 +1,15 @@
 package com.example.hw6exercise21
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.View.inflate
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hw6exercise21.databinding.ListItemCrimeBinding
 import com.example.hw6exercise21.databinding.ListItemCrimeNewBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class CrimeHolder(
@@ -14,7 +17,13 @@ class CrimeHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(crime: Crime) {
         binding.crimeTitle.text = crime.title
-        binding.crimeDate.text = crime.date.toString()
+
+
+//New formatted date for each entry
+//Documentation: StackOverFlow -- How to use "android.text.format.DateFormat" with Kotlin?
+        val crimeDate = SimpleDateFormat("EE. MMM. dd, yyyy", Locale.US)
+        val NewDate : String = crimeDate.format(crime.date).toString()
+        binding.crimeDate.text = NewDate
 
         binding.root.setOnClickListener {
             Toast.makeText(
@@ -22,6 +31,12 @@ class CrimeHolder(
                 "${crime.title} clicked!",
                 Toast.LENGTH_SHORT
             ).show()
+        }
+
+        binding.crimeSolved.visibility = if (crime.isSolved){
+            View.VISIBLE
+        } else {
+            View.GONE
         }
     }
 
